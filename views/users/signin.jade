@@ -3,8 +3,11 @@ extends ../templates/default
 block content
   div(class='row')
     div(class='col-md-3 col-md-offset-5')
+      
       if message.length > 0
         div(class='alert alert-success' role='alert')= message
+
+
       div(class='panel planel-default')
         div(class='panel-heading')='Iniciar Sesion'
         div(class='panel-body')
