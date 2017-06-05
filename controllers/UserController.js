@@ -38,5 +38,12 @@ module.exports = {
   logout : function(req, res, next){
     req.logout();
     res.redirect('/');
+  },
+
+  getUserPanel : function(req, res, next){
+    res.render('users/panel', {
+      isAuthenticated : req.isAuthenticated(),
+      user : req.user
+    });
   }
 };

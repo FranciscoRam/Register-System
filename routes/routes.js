@@ -16,11 +16,13 @@ router.post('/auth/signup', controllers.UserController.postSignUp);
 
 router.get('/auth/signin', controllers.UserController.getSignIn);
 router.post('/auth/signin', passport.authenticate('local', {
-	successRedirect : '/',
+	successRedirect : '/auth/panel',
 	failureRedirect : '/auth/signin',
 	failureFlash : true 
 }));
 
 router.get('/auth/logout', controllers.UserController.logout);
+router.get('/auth/panel', controllers.UserController.getUserPanel)
+
 
 module.exports = router;
