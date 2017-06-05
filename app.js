@@ -13,7 +13,7 @@ var app = express();
 
 app.use(cookieParser());
 app.use(session({
-	secret: '';
+	secret: 'RaitesFimee',
 	resave: false,
 	saveUnitialized: false
 }));
