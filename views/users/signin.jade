@@ -4,16 +4,14 @@ block content
   div(class='row')
     div(class='col-md-3 col-md-offset-5')
       div(class='panel planel-default')
-        div(class='panel-heading')='Registrarme'
+        div(class='panel-heading')='Iniciar Sesion'
         div(class='panel-body')
           form(action='http://localhost:3000/auth/signup' method='post' autocomplete='off')
             div(class='form-group')
               label(for='email')='Email'
               input(type='email' name='email' id='email' placeholder='Email' class='form-control')
-            div(class='form-group')
-              label(for='nombre')='Nombre'
-              input(type='nombre' name='nombre' id='nombre' placeholder='Nombre' class='form-control')
+            
             div(class='form-group')
               label(for='password')='Password'
               input(type='password' name='password' id='password' placeholder='Password' class='form-control')
-            button(type="submit" class='btn btn-default')= 'Registrar'
+            button(type="submit" class='btn btn-default')= 'Ingresar'

@@ -11,5 +11,8 @@ router.get('/', controllers.HomeController.index);
 
 //Rutas de usuario
 router.get('/auth/signup', controllers.UserController.getSignUp);
+router.post('/auth/signup', controllers.UserController.postSignUp);
+
+router.get('/auth/signin', controllers.UserController.getSignIn);
 
 module.exports = router;
