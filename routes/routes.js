@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var controllers = require('.././controllers');
 var passport = require('passport');
+var AuthMiddleware = require('.././middleware/auth');
 /* GET home page.
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -22,7 +23,7 @@ router.post('/auth/signin', passport.authenticate('local', {
 }));
 
 router.get('/auth/logout', controllers.UserController.logout);
-router.get('/auth/panel', controllers.UserController.getUserPanel)
+router.get('/auth/panel', AuthMiddleware.isLogged, controllers.UserController.getUserPanel)
 
 
 module.exports = router;
