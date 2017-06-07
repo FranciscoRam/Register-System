@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 */
 
-router.get('/', controllers.HomeController.index);
+router.get('/inicio', controllers.HomeController.index);
 
 //Rutas de usuario
 router.get('/auth/signup', controllers.UserController.getSignUp);

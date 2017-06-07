@@ -3,3 +3,5 @@ extends ../templates/default
 block content
 
   p= 'Hola... ' + user.nombre
+  if user.nombre=='Francisco'
+  	p= "que tal Francisco"
