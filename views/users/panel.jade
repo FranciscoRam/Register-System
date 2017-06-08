@@ -1,8 +1,6 @@
 extends ../templates/default
 
+
 block content
-
-  p= 'Hola... ' + user.nombre
-
-  if user.nombre == 'Francisco Ramirez'
-    p= 'HOLA FRANCISCANO'
+  p= 'HOLA QUE HACE?'
+  p= publication.salida[9]

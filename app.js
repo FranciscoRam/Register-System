@@ -10,8 +10,34 @@ var routes = require('./routes/routes');
 var passport = require('passport');
 require('./passport/passport')(passport);
 
+//var user = require('./routes/pub');
+//var http = require('http');
+
+var mysql = require('mysql');
 var app = express();
 
+//conectando a base de datos
+/*
+var config = require('./database/config');
+
+var db = mysql.createConnection(config);
+
+db.connect(function(err){
+if (err) throw err
+
+console.log('Tu estas conectadop');
+db.query('SELECT * FROM publications', function(err, results){
+  if (err) throw err
+
+  var publication=results;
+  for(i=0;i<publication.length;i++)
+    console.log(publication[i].salida);
+});
+db.end();
+});
+*/
+
+//add plugins
 app.use(cookieParser());
 app.use(session({
 	secret: 'RaitesFimee',
@@ -31,6 +57,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
