@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 */
 
-router.get('/inicio', controllers.HomeController.index);
+router.get('/', controllers.HomeController.index);
 
 //Rutas de usuario
 router.get('/auth/signup', controllers.UserController.getSignUp);
@@ -22,8 +22,15 @@ router.post('/auth/signin', passport.authenticate('local', {
 	failureFlash : true 
 }));
 
+router.post('/auth/signin', passport.authenticate('local', {
+	successRedirect : '/auth/perfil',
+	failureRedirect : '/auth/signin',
+	failureFlash : true 
+}));
+
+
 router.get('/auth/logout', controllers.UserController.logout);
 router.get('/auth/panel', AuthMiddleware.isLogged, controllers.UserController.getUserPanel)
-
+router.get('/auth/perfil', AuthMiddleware.isLogged, controllers.UserController.getUserPerfil)
 
 module.exports = router;

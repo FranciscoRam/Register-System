@@ -1,0 +1,16 @@
+extends ../templates/default
+
+block content
+  div(class='row')
+    div(class='col-md-10 col-md-offset-1')
+      div(class='panel planel-default')
+        div(class='panel-heading')='Perfil de Usuario'
+        div(class='panel-body')
+          form(action='http://localhost:3000/auth/perfil' method='post' autocomplete='off')
+            if user.typeuser == 'Conductor'
+              laber(for='typeuser')='Felicidades eres un Conductor'
+              button(type="submit" class='btn btn-default')= 'YEAH!'
+            else
+              div(class='form-group')
+                h3= user.nombre
+                img(src="http://orig15.deviantart.net/08c1/f/2016/020/0/4/gear_fourth_by_iiyametaii-d9onhvl.jpg" border="0" width="150" height="150")

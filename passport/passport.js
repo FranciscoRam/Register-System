@@ -33,7 +33,8 @@ module.exports = function(passport){
 					return done(null, {
 						id : user.id,
 						nombre : user.nombre,
-						email : user.email
+						email : user.email,
+						typeuser : user.typeuser
 					});
 				}
 			}

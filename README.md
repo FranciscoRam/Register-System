@@ -23,3 +23,7 @@ create table users(
 	password varchar(255) not null
 )
 ```
+
+## Youtube
+
+[Video de avance](https://www.youtube.com/watch?v=c_8iWQeudVk&feature=youtu.be)

@@ -13,7 +13,8 @@ module.exports = {
     var user = {
       email : req.body.email,
       nombre : req.body.nombre,
-      password : password
+      password : password,
+      typeuser: req.body.typeuser
     };
 
     var config = require('.././database/config');
@@ -42,6 +43,13 @@ module.exports = {
 
   getUserPanel : function(req, res, next){
     res.render('users/panel', {
+      isAuthenticated : req.isAuthenticated(),
+      user : req.user
+    });
+  },
+
+  getUserPerfil : function(req, res, next){
+    res.render('users/perfil', {
       isAuthenticated : req.isAuthenticated(),
       user : req.user
     });
