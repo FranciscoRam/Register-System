@@ -53,5 +53,39 @@ module.exports = {
       isAuthenticated : req.isAuthenticated(),
       user : req.user
     });
+  },
+
+  postPublication : function(req, res, next){
+    /*
+    salida varchar(255) not null,
+  destino varchar(255) not null,
+  hsalida varchar(255) not null,
+  hdestino
+
+    */
+    var publication = {
+      salida : req.body.salida,
+      id_user : req.user.id,
+      destino : req.body.destino,
+      hsalida : req.body.hsalida,
+      hdestino: req.body.hdestino
+    };
+
+    var config = require('.././database/config');
+
+    var db = mysql.createConnection(config);
+
+    db.connect();
+
+    db.query('INSERT INTO publications SET ?', publication, function(err, rows, fields){
+      if(err) throw err;
+
+      db.end();
+    });
+    
+   // req.flash('info', 'Se ha registrado correctamente, ya puede iniciar sesion');
+    return console.log('Base de datos actualizada');
   }
+
+
 };

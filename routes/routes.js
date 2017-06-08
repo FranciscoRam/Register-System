@@ -33,4 +33,6 @@ router.get('/auth/logout', controllers.UserController.logout);
 router.get('/auth/panel', AuthMiddleware.isLogged, controllers.UserController.getUserPanel)
 router.get('/auth/perfil', AuthMiddleware.isLogged, controllers.UserController.getUserPerfil)
 
+router.post('/auth/perfil', controllers.UserController.postPublication);
+
 module.exports = router;
