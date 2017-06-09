@@ -154,15 +154,33 @@ module.exports = {
     db.connect();
 
     if(num_del!=''){
-      db.query('SELECT * FROM publications WHERE id_user = ?', req.user.id, function(err,results){
-        num_del=num_del-1;
-        var id_pub=results[num_del].id;
-        //ELIMINANDO DATO de la DB
-        db.query('DELETE FROM publications WHERE id = ?', id_pub);
 
-        //console.log('id Publicacion= '+id_pub);
-        db.end();
-      });
+      if(req.user.typeuser=='Conductor'){
+            db.query('SELECT * FROM publications WHERE id_user = ?', req.user.id, function(err,results){
+              num_del=num_del-1;
+              var id_pub=results[num_del].id;
+              //ELIMINANDO DATO de la DB
+              db.query('DELETE FROM publications WHERE id = ?', id_pub);
+
+              //console.log('id Publicacion= '+id_pub);
+              db.end();
+          });
+      }
+      if (req.user.typeuser=='Pasajero') {
+
+        db.query('SELECT * FROM subsraids WHERE id_user = ?', req.user.id, function(err,results){
+              num_del=num_del-1;
+              var id_pub=results[num_del].id;
+              //ELIMINANDO DATO de la DB
+              db.query('DELETE FROM subsraids WHERE id = ?', id_pub);
+
+              //console.log('id Publicacion= '+id_pub);
+              db.end();
+          });
+
+      }
+
+
       return res.redirect('/auth/perfil');
 
     }else{
