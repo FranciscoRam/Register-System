@@ -1,6 +1,22 @@
 extends ../templates/default
-
+script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js")
 
 block content
-  p= 'HOLA QUE HACE?'
-  p= publication.salida[9]
+
+  div(class='row')
+    div(class='col-md-10 col-md-offset-1')
+      div(class='panel planel-default')
+        div(class='panel-heading')
+          div(class='panel-body')
+            table(class='table table-striped')
+             tr(class='atributo')
+                td='Lugar de Salida'
+                td='Hora de salida'
+                td='Lugar de Destino'
+                td='Hora de llegada'
+              - for(var i=0; i<publication.salida.length; i++)
+                tr(class='pub')
+                  td=publication.salida[i]
+                  td=publication.hsalida[i]
+                  td=publication.destino[i]
+                  td=publication.hdestino[i]

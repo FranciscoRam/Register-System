@@ -1,7 +1,7 @@
 extends ../templates/default
 
 block content
-  div(class='row')
+  div(class='row' width='400')
     div(class='col-md-10 col-md-offset-1')
       div(class='panel planel-default')
         div(class='panel-heading')
@@ -9,26 +9,43 @@ block content
             form(action='http://localhost:3000/auth/perfil' method='post' autocomplete='off')
               h2='Perfil de Usuario'
               div(class='col-md-2')
-                img(src="http://orig15.deviantart.net/08c1/f/2016/020/0/4/gear_fourth_by_iiyametaii-d9onhvl.jpg" border="0" width="150" height="150")
+                img(src="http://orig15.deviantart.net/08c1/f/2016/020/0/4/gear_fourth_by_iiyametaii-d9onhvl.jpg" border="0" width="100" height="100")
               h3= 'Nombre: '+user.nombre
               h3= 'Eres un: '+user.typeuser
               if user.typeuser == 'Conductor'
-                div(class='col-md-2')
+              br
+              div(class='col-md-14')
+                div(class='col-md-3')
                   laber(for='salida')='Ruta Salida'
                   input(type='salida' name='salida' id='salida' placeholder='Salida' class='form-control')
-          
-                div(class='col-md-2' padding-right='50')
+                        
+                div(class='col-md-3' padding-right='50')
                   laber(for='destino')='Ruta Destino'
                   input(type='destino' name='destino' id='destino' placeholder='Destino' class='form-control')
 
-                div(class='col-md-2')
-                  laber(for='hsalida')='Programar hora salida'
+                div(class='col-md-3')
+                  laber(for='hsalida')='Hora de salida'
                   input(type='hsalida' name='hsalida' id='hsalida' placeholder='HH:MM' class='form-control')
 
-                div(class='col-md-2')
-                  laber(for='hdestino')='Programar hora llegada'
+                div(class='col-md-3')
+                  laber(for='hdestino')='Hora de llegada'
                   input(type='hdestino' name='hdestino' id='hdestino' placeholder='HH:MM' class='form-control')
-                button(type="submit" class='btn btn-default' href="/auth/panel")= 'Publicar'
-              else
-              
+                  br
+                center
+                  button(type="submit" class='btn btn-default' href="/auth/panel")= 'Publicar'
+                  
+                  h3='Lista de tus Raids'
+                  table(class='table table-striped')
+                    tr(class='atributo')
+                      th='Lugar de Salida'
+                      th='Hora de salida'
+                      th='Lugar de Destino'
+                      th='Hora de llegada'
+                    - for(var i=0; i<publication.salida.length; i++)
+                      tr(class='pub')
+                        td=(i+1)+'.- '+publication.salida[i]
+                        td=publication.hsalida[i]
+                        td=publication.destino[i]
+                        td=publication.hdestino[i]
+                                        
               
