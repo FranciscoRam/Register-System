@@ -8,15 +8,22 @@ block content
       div(class='panel planel-default')
         div(class='panel-heading')
           div(class='panel-body')
-            table(class='table table-striped')
-             tr(class='atributo')
-                td='Lugar de Salida'
-                td='Hora de salida'
-                td='Lugar de Destino'
-                td='Hora de llegada'
-              - for(var i=0; i<publication.salida.length; i++)
-                tr(class='pub')
-                  td=publication.salida[i]
-                  td=publication.hsalida[i]
-                  td=publication.destino[i]
-                  td=publication.hdestino[i]
+            form(action='http://localhost:3000/auth/panel' method='post' autocomplete='off')
+              if user.typeuser=='Pasajero'
+                div(class='col-md-3')
+                  laber(for='agregar')='Número de raid para agregar'
+                  input(type='agregar' name='agregar' id='agregar' placeholder='número' class='form-control')
+                  br
+                button(type='ADD' name='ADD' id='ADD' class='btn btn-success btn-lg' href='/auth/perfil')= 'Agregar'
+              table(class='table table-striped')
+               tr(class='atributo')
+                  th='Lugar de Salida'
+                  th='Hora de salida'
+                  th='Lugar de Destino'
+                  th='Hora de llegada'
+                - for(var i=0; i<publication.salida.length; i++)
+                  tr(class='pub')
+                    td=(i+1)+'.- '+publication.salida[i]
+                    td=publication.hsalida[i]
+                    td=publication.destino[i]
+                    td=publication.hdestino[i]

@@ -30,8 +30,11 @@ router.post('/auth/signin', passport.authenticate('local', {
 
 
 router.get('/auth/logout', controllers.UserController.logout);
-router.get('/auth/panel', AuthMiddleware.isLogged, controllers.UserController.getUserPanel)
-router.get('/auth/perfil', AuthMiddleware.isLogged, controllers.UserController.getUserPerfil)
+
+router.get('/auth/panel', AuthMiddleware.isLogged, controllers.UserController.getUserPanel);
+router.post('/auth/panel', AuthMiddleware.isLogged, controllers.UserController.postUserPanel);
+
+router.get('/auth/perfil', AuthMiddleware.isLogged, controllers.UserController.getUserPerfil);
 
 router.post('/auth/perfil', controllers.UserController.postPublication);
 //router.get('/auth/panel', AuthMiddleware.isLogged, controllers.UserController.getPublication);

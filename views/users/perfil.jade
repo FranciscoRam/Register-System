@@ -12,40 +12,51 @@ block content
                 img(src="http://orig15.deviantart.net/08c1/f/2016/020/0/4/gear_fourth_by_iiyametaii-d9onhvl.jpg" border="0" width="100" height="100")
               h3= 'Nombre: '+user.nombre
               h3= 'Eres un: '+user.typeuser
-              if user.typeuser == 'Conductor'
-              br
-              div(class='col-md-14')
-                div(class='col-md-3')
-                  laber(for='salida')='Ruta Salida'
-                  input(type='salida' name='salida' id='salida' placeholder='Salida' class='form-control')
-                        
-                div(class='col-md-3' padding-right='50')
-                  laber(for='destino')='Ruta Destino'
-                  input(type='destino' name='destino' id='destino' placeholder='Destino' class='form-control')
+              if user.typeuser != 'Conductor'
 
-                div(class='col-md-3')
-                  laber(for='hsalida')='Hora de salida'
-                  input(type='hsalida' name='hsalida' id='hsalida' placeholder='HH:MM' class='form-control')
-
-                div(class='col-md-3')
-                  laber(for='hdestino')='Hora de llegada'
-                  input(type='hdestino' name='hdestino' id='hdestino' placeholder='HH:MM' class='form-control')
-                  br
+              else
                 center
-                  button(type="submit" class='btn btn-default' href="/auth/panel")= 'Publicar'
-                  
-                  h3='Lista de tus Raids'
-                  table(class='table table-striped')
-                    tr(class='atributo')
-                      th='Lugar de Salida'
-                      th='Hora de salida'
-                      th='Lugar de Destino'
-                      th='Hora de llegada'
-                    - for(var i=0; i<publication.salida.length; i++)
-                      tr(class='pub')
-                        td=(i+1)+'.- '+publication.salida[i]
-                        td=publication.hsalida[i]
-                        td=publication.destino[i]
-                        td=publication.hdestino[i]
+                  div(class='col-md-15')
+                    br
+                    div(class='col-md-3')
+                      laber(for='salida')='Ruta Salida'
+                      input(type='salida' name='salida' id='salida' placeholder='Salida' class='form-control')
+                            
+                    div(class='col-md-3' padding-right='50')
+                      laber(for='destino')='Ruta Destino'
+                      input(type='destino' name='destino' id='destino' placeholder='Destino' class='form-control')
+
+                    div(class='col-md-3')
+                      laber(for='hsalida')='Hora de salida'
+                      input(type='hsalida' name='hsalida' id='hsalida' placeholder='HH:MM' class='form-control')
+
+                    div(class='col-md-3')
+                      laber(for='hdestino')='Hora de llegada'
+                      input(type='hdestino' name='hdestino' id='hdestino' placeholder='HH:MM' class='form-control')
+                      br
+                    center
+                      button(type="submit" class='btn btn-success btn-lg' href="/auth/panel")= 'Publicar'
+                      
+                      h3='Lista de tus Raids'
+                      table(class='table table-striped')
+                        tr(class='atributo')
+                          th='Lugar de Salida'
+                          th='Hora de salida'
+                          th='Lugar de Destino'
+                          th='Hora de llegada'
+                        - for(var i=0; i<publication.salida.length; i++)
+                            tr(class='pub')
+                              td(name='pubsalida' id='pubsalida' onclick="alert('HOLA MUNDO!');")=i+1+'.- '+publication.salida[i]
+                              td(name='pubhsalida' id='pubhsalida')=publication.hsalida[i]
+                              td(name='pubdestino' id='pubdestino')=publication.destino[i]
+                              td(name='pubhdestino' id='pubhdestino')=publication.hdestino[i]
+                div(class='col-md-3')
+                  laber(for='delete')='Número de fila a eliminar'
+                  input(type='delete' name='delete' id='delete' placeholder='número' class='form-control')
+                br
+                button(type='eliminar' name='eliminar' id='eliminar' class='btn btn-danger btn-lg' href='/auth/perfil')= 'Eliminar'
+
+              
+                
                                         
               
