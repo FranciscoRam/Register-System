@@ -12,9 +12,22 @@ block content
                 img(src="http://orig15.deviantart.net/08c1/f/2016/020/0/4/gear_fourth_by_iiyametaii-d9onhvl.jpg" border="0" width="100" height="100")
               h3= 'Nombre: '+user.nombre
               h3= 'Eres un: '+user.typeuser
-              if user.typeuser != 'Conductor'
+              if user.typeuser == 'Pasajero'
+                p= subsraid.pas_salida[0]
+                table(class='table table-striped')
+                  tr(class='atributo')
+                    th='Lugar de Salida'
+                    th='Hora de salida'
+                    th='Lugar de Destino'
+                     th='Hora de llegada'
+                    - for(var i=0; i<subsraid.pas_salida.length; i++)
+                        tr(class='pub')
+                          td(name='pubsalida' id='pubsalida' onclick="alert('HOLA MUNDO!');")=i+1+'.- '+subsraid.pas_salida[i]
+                          td(name='pubhsalida' id='pubhsalida')=subsraid.pas_hsalida[i]
+                          td(name='pubdestino' id='pubdestino')=subsraid.pas_destino[i]
+                          td(name='pubhdestino' id='pubhdestino')=subsraid.pas_hdestino[i]
 
-              else
+              if user.typeuser == 'Conductor'
                 center
                   div(class='col-md-15')
                     br
@@ -50,11 +63,11 @@ block content
                               td(name='pubhsalida' id='pubhsalida')=publication.hsalida[i]
                               td(name='pubdestino' id='pubdestino')=publication.destino[i]
                               td(name='pubhdestino' id='pubhdestino')=publication.hdestino[i]
-                div(class='col-md-3')
-                  laber(for='delete')='Número de fila a eliminar'
-                  input(type='delete' name='delete' id='delete' placeholder='número' class='form-control')
-                br
-                button(type='eliminar' name='eliminar' id='eliminar' class='btn btn-danger btn-lg' href='/auth/perfil')= 'Eliminar'
+              div(class='col-md-3')
+                laber(for='delete')='Número de fila a eliminar'
+                input(type='delete' name='delete' id='delete' placeholder='número' class='form-control')
+              br
+              button(type='eliminar' name='eliminar' id='eliminar' class='btn btn-danger btn-lg' href='/auth/perfil')= 'Eliminar'
 
               
                 

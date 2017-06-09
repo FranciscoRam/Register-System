@@ -50,39 +50,85 @@ module.exports = {
     var db = mysql.createConnection(config);
     db.connect();
     
-    console.log('ID de usuario es= '+req.user.id);
+    console.log('Tipo de usuario es= '+req.user.typeuser);
+    //Un IF ya que el perfil contiene informacion diferente dependiendo del tipo de usuario, usa diferentes tablas
+    if(req.user.typeuser=='Conductor'){
     //hace una busqueda en la base de datos de todas las publicaciones que hay
-    db.query('SELECT * FROM publications WHERE id_user = ?', req.user.id,function(err, results){
-      if (err) throw err
+        db.query('SELECT * FROM publications WHERE id_user = ?', req.user.id,function(err, results){
+          if (err) throw err
+      //    db.query('SELECT * FROM subsraids WHERE id_user = ?', req.user.id,function(err, subsresults){
 
-      var salida=[];
-      var destino=[];
-      var hsalida=[];
-      var hdestino=[];
-      var id_user=[];
-      //var publication=results[9];
-      for(i=0;i<results.length;i++){
-        //console.log(results[i].salida);
-        salida[i]=results[i].salida;
-        destino[i]=results[i].destino;
-        hsalida[i]=results[i].hsalida;
-        hdestino[i]=results[i].hdestino;
-        id_user[i]=results[i].id_user;
-      }
-      var publication={
-          salida : salida,
-          destino : destino,
-          hdestino : hdestino,
-          hsalida : hsalida,
-          id_user : id_user
-        }
-      db.end();
-      res.render('users/perfil', {
-      isAuthenticated : req.isAuthenticated(),
-      user : req.user,
-      publication : publication
+          var salida=[];
+          var destino=[];
+          var hsalida=[];
+          var hdestino=[];
+          var id_user=[];
+          //var publication=results[9];
+          for(i=0;i<results.length;i++){
+            //console.log(results[i].salida);
+            salida[i]=results[i].salida;
+            destino[i]=results[i].destino;
+            hsalida[i]=results[i].hsalida;
+            hdestino[i]=results[i].hdestino;
+            id_user[i]=results[i].id_user;
+          }
+          var publication={
+              salida : salida,
+              destino : destino,
+              hdestino : hdestino,
+              hsalida : hsalida,
+              id_user : id_user
+            }
+          db.end();
+          res.render('users/perfil', {
+          isAuthenticated : req.isAuthenticated(),
+          user : req.user,
+          publication : publication
+          });
+
+
+      //    });//Final del query de subraids
+
+        });//FInal del query de publications
+     }if(req.user.typeuser=='Pasajero'){
+
+      db.query('SELECT * FROM subsraids WHERE id_user = ?', req.user.id,function(err, results){
+          if (err) throw err
+
+          var pas_salida=[];
+          var pas_destino=[];
+          var pas_hsalida=[];
+          var pas_hdestino=[];
+          var id_user=[];
+          var id_pub=[];
+
+
+          for(i=0;i<results.length;i++){
+            console.log(results[i].pas_salida);
+            pas_salida[i]=results[i].pas_salida;
+            pas_destino[i]=results[i].pas_destino;
+            pas_hsalida[i]=results[i].pas_hsalida;
+            pas_hdestino[i]=results[i].pas_hdestino;
+            id_user[i]=results[i].id_user;
+            id_pub[i]=results.id_pub;
+          }
+          var subsraid={
+              pas_salida : pas_salida,
+              pas_destino : pas_destino,
+              pas_hdestino : pas_hdestino,
+              pas_hsalida : pas_hsalida,
+              id_user : id_user,
+              id_pub : id_pub
+            }
+          db.end();
+          res.render('users/perfil', {
+          isAuthenticated : req.isAuthenticated(),
+          user : req.user,
+          subsraid : subsraid
+          });
+
       });
-    });
+     }
   },
 
   postPublication : function(req, res, next){
@@ -189,7 +235,7 @@ module.exports = {
 
       var subsraids = {
         pas_salida : results[id_agregar-1].salida,
-        id_user : results[id_agregar-1].id_user,
+        id_user : req.user.id,
         pas_destino : results[id_agregar-1].destino,
         pas_hsalida : results[id_agregar-1].hsalida,
         pas_hdestino : results[id_agregar-1].hdestino,
